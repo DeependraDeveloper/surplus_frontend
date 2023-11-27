@@ -36,3 +36,4 @@ const kSendMessage = "/send/chat";
 const kBlessPost = "/bless/post";
 const kGetPost = "/post";
 const kUserProfile = "/info";
+const kDeletePost = "/delete/post";

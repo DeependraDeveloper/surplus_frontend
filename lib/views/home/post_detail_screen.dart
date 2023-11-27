@@ -99,7 +99,7 @@ class _PostDetailState extends State<PostDetail> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   const SizedBox(
-                    height: 30,
+                    height: 10,
                   ),
                   ClipRRect(
                     borderRadius: BorderRadius.circular(12.0),
@@ -156,13 +156,23 @@ class _PostDetailState extends State<PostDetail> {
                   const SizedBox(
                     height: 30,
                   ),
-                  Text(
-                    '${distance.toStringAsFixed(2)} kms away.',
-                    style: GoogleFonts.montserrat(
-                      color: const Color(0xFFF15A29),
-                      fontWeight: FontWeight.bold,
-                      fontSize: 14,
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        '${distance.toStringAsFixed(2)} kms away.',
+                        style: GoogleFonts.montserrat(
+                          color: const Color(0xFFF15A29),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
+                        ),
+                      ),
+                      const Icon(
+                        Icons.social_distance,
+                        color: Color(0xFFF15A29),
+                        size: 34,
+                      ),
+                    ],
                   ),
                   const SizedBox(
                     height: 20,
@@ -281,4 +291,7 @@ class _PostDetailState extends State<PostDetail> {
       ),
     );
   }
+
+  @override
+  List<Object?> get props => [];
 }

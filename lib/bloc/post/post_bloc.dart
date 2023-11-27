@@ -20,6 +20,7 @@ class PostBloc extends HydratedBloc<PostEvent, PostState> {
     on<SearchPostEvent>(_onSearchPostEvent);
     on<BlessPostEvent>(_onBlessPostEvent);
     on<GetPostEvent>(_onGetPostEvent);
+    on<DeletePostEvent>(_onDeletePostEvent);
   }
   final UserRepository repository;
 
@@ -161,6 +162,25 @@ class PostBloc extends HydratedBloc<PostEvent, PostState> {
 
         emit(state.copyWith(
           post: post,
+          isLoading: false,
+        ));
+      } else {
+        emit(state.copyWith(isLoading: false, error: response.message));
+      }
+    } catch (e) {
+      emit(state.copyWith(isLoading: false, error: e.toString()));
+    }
+  }
+
+  Future<FutureOr<void>> _onDeletePostEvent(
+      DeletePostEvent event, Emitter<PostState> emit) async {
+    emit(state.copyWith(isLoading: true, error: '', message: ''));
+    try {
+      final response = await repository.deletePost(postId: event.postId);
+
+      if (response.success) {
+        emit(state.copyWith(
+          message: response.message,
           isLoading: false,
         ));
       } else {

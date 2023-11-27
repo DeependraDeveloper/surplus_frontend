@@ -71,7 +71,8 @@ class _UpdatePostState extends State<UpdatePostScreen> {
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: BlocConsumer<PostBloc, PostState>(
           listener: (context, state) {
-            if (state.message == 'Post Updated Successfully!.') {
+            if (state.message == 'Post Updated Successfully!.' ||
+                state.message == "Post Deleted Succesfully!") {
               context.read<ProfilePostsBloc>().add(
                     UserPostLoadEvent(
                         userId:
@@ -92,7 +93,9 @@ class _UpdatePostState extends State<UpdatePostScreen> {
                       ),
                       const SizedBox(height: 10),
                       Text(
-                        "Post has been Updated succesfull",
+                        state.message == 'Post Updated Successfully!.'
+                            ? "Post has been Updated succesfully"
+                            : "Post has been Deleted successfully",
                         style: GoogleFonts.montserrat(
                           fontSize: 18,
                           fontWeight: FontWeight.w700,
@@ -103,7 +106,7 @@ class _UpdatePostState extends State<UpdatePostScreen> {
                   actions: [
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Theme.of(context).colorScheme.primary,
+                        backgroundColor: const Color(0xFFF15A29),
                       ),
                       onPressed: () {
                         while (context.canPop()) {
@@ -272,15 +275,22 @@ class _UpdatePostState extends State<UpdatePostScreen> {
                         children: [
                           Flexible(
                             child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor:
+                                    const Color.fromARGB(255, 223, 30, 16),
+                              ),
                               onPressed: () {
+                                context.read<PostBloc>().add(DeletePostEvent(
+                                      postId: widget.model.id ?? '',
+                                    ));
                                 context.pop();
                               },
                               child: Text(
-                                "Cancel",
+                                "Delete",
                                 style: GoogleFonts.montserrat(
                                   fontSize: 18,
                                   fontWeight: FontWeight.w700,
-                                  color: Colors.black,
+                                  color: Colors.white,
                                 ),
                               ),
                             ),
@@ -289,7 +299,8 @@ class _UpdatePostState extends State<UpdatePostScreen> {
                           Flexible(
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: const Color(0xFFF15A29),
+                                backgroundColor:
+                                    const Color.fromARGB(255, 241, 84, 32),
                               ),
                               onPressed: () {
                                 if (!_formkey.currentState!.validate()) {

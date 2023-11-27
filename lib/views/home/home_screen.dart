@@ -137,7 +137,7 @@ class _HomeState extends State<Home> {
 
           if (state.posts.isNotEmpty == true) {
             return Padding(
-              padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+              padding: const EdgeInsets.only(left: 6.0, right: 6.0),
               child: RefreshIndicator(
                 onRefresh: () {
                   context.read<PostBloc>().add(
@@ -175,20 +175,35 @@ class _HomeState extends State<Home> {
                               context
                                   .read<PostBloc>()
                                   .add(GetPostEvent(postId: postId));
-
-                              context.pushNamed(
-                                'detail',
-                                // extra: post,
-                              );
+                              context.pushNamed('detail');
                             },
                             child: Container(
+                              height: 280,
                               margin: const EdgeInsets.all(8),
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 8),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(12.0),
-                                border: Border.all(color: Colors.white38),
-                                color: Colors.grey[300],
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.3),
+                                    spreadRadius: 2,
+                                    blurRadius: 5,
+                                    offset: const Offset(0, 3),
+                                  ),
+                                ],
+                                gradient: LinearGradient(
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                  colors: [
+                                    // Colors.orange.shade200,
+                                    // Colors.orange.shade400,
+                                    Colors.deepOrange.shade200,
+                                    Colors.deepOrange.shade400
+                                    // Colors.orange.shade300,
+                                    // Colors.orange.shade600
+                                    // Colors.orange.shade100,
+                                    // Colors.orange.shade300
+                                  ],
+                                ),
                               ),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -209,79 +224,98 @@ class _HomeState extends State<Home> {
                                       ),
                                     ),
                                   ),
-                                  const SizedBox(
-                                    height: 8,
-                                  ),
-                                  Text(
-                                    title.toUpperCase(),
-                                    style: GoogleFonts.montserrat(
-                                      fontWeight: FontWeight.bold,
+                                  const SizedBox(height: 8),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 10),
+                                    child: Text(
+                                      title.toUpperCase(),
+                                      style: GoogleFonts.montserrat(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 17,
+                                        // color: Colors.white,
+                                        color: const Color(0xFF2E2E2E),
+                                      ),
                                     ),
                                   ),
-                                  const SizedBox(
-                                    height: 5,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        '${distance.toStringAsFixed(2)} Km away',
-                                        style: GoogleFonts.montserrat(
-                                          color: const Color(0xFFF15A29),
-                                          fontWeight: FontWeight.normal,
-                                        ),
-                                      ),
-                                      GestureDetector(
-                                        onTap: () {
-                                          BlocProvider.of<PostBloc>(context)
-                                              .add(
-                                            BlessPostEvent(
-                                              postId: postId,
-                                              userId: user,
-                                            ),
-                                          );
-
-                                          BlocProvider.of<ProfilePostsBloc>(
-                                                  context)
-                                              .add(
-                                            UserPostLoadEvent(userId: user),
-                                          );
-                                        },
-                                        child: Material(
-                                          elevation: 4,
-                                          borderRadius:
-                                              BorderRadius.circular(5),
-                                          child: Container(
-                                            width: 100,
-                                            height: 30,
-                                            decoration: BoxDecoration(
-                                              color: isBlessed
-                                                  ? const Color(0xFFF15A29)
-                                                  : Colors.white,
-                                              borderRadius:
-                                                  BorderRadius.circular(5),
-                                              border: Border.all(
-                                                  color: Colors.black),
-                                            ),
-                                            child: Center(
-                                              child: Text(
-                                                isBlessed ? 'Blessed' : 'Bless',
-                                                textAlign: TextAlign.start,
-                                                style: GoogleFonts.montserrat(
-                                                  color: isBlessed
-                                                      ? Colors.white
-                                                      : const Color(0xFFF15A29),
-                                                  fontWeight: FontWeight.w500,
-                                                  fontSize: 18,
-                                                ),
-                                              ),
-                                            ),
+                                  const SizedBox(height: 5),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 10),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          '${distance.toStringAsFixed(2)} Km away',
+                                          style: GoogleFonts.montserrat(
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 14,
+                                            color: const Color.fromARGB(
+                                                255, 255, 255, 255),
                                           ),
                                         ),
-                                      )
-                                    ],
-                                  )
+                                        GestureDetector(
+                                            onTap: () {
+                                              BlocProvider.of<PostBloc>(context)
+                                                  .add(
+                                                BlessPostEvent(
+                                                  postId: postId,
+                                                  userId: user,
+                                                ),
+                                              );
+
+                                              BlocProvider.of<ProfilePostsBloc>(
+                                                      context)
+                                                  .add(
+                                                UserPostLoadEvent(userId: user),
+                                              );
+                                            },
+                                            child: Material(
+                                              elevation: 4,
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                              child: Container(
+                                                width: 100,
+                                                height: 30,
+                                                decoration: BoxDecoration(
+                                                  color: isBlessed
+                                                      ? const Color(0xFFF15A29)
+                                                      : Colors.white,
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
+                                                  border: Border.all(
+                                                      color: Colors.black),
+                                                ),
+                                                child: Center(
+                                                  child:
+                                                      AnimatedDefaultTextStyle(
+                                                    duration: const Duration(
+                                                        milliseconds: 300),
+                                                    style:
+                                                        GoogleFonts.montserrat(
+                                                      color: isBlessed
+                                                          ? Colors.white
+                                                          : const Color(
+                                                              0xFFF15A29),
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontSize: 18,
+                                                    ),
+                                                    child: Text(
+                                                      isBlessed
+                                                          ? 'Blessed'
+                                                          : 'Bless',
+                                                      textAlign:
+                                                          TextAlign.start,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ))
+                                      ],
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),
@@ -395,7 +429,7 @@ class _RangeSelectionDialogState extends State<RangeSelectionDialog> {
                   ),
                 );
             context.read<UserBloc>().add(GetUserEvent(userId: userId));
-            context.pop(); // Return the selected range on OK press
+            context.pop();
           },
           child: const Text('OK'),
         ),

@@ -53,7 +53,7 @@ class _SearchState extends State<Search> {
         ),
         centerTitle: true,
         bottom: const PreferredSize(
-          preferredSize: Size.fromHeight(2), // Adjust the height of the line
+          preferredSize: Size.fromHeight(2),
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 14),
             child: Divider(
@@ -158,9 +158,11 @@ class _SearchState extends State<Search> {
                         var post = posts[index];
                         return GestureDetector(
                           onTap: () {
+                            context
+                                .read<PostBloc>()
+                                .add(GetPostEvent(postId: post.id ?? ''));
                             context.pushNamed(
                               'detail',
-                              extra: post,
                             );
                           },
                           child: PostCard(

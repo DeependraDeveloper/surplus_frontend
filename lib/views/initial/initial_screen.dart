@@ -44,8 +44,6 @@ class _InitialScreenState extends State<InitialScreen> {
               size: 40,
             ),
             onPressed: () async {
-              // final prefs = await SharedPreferences.getInstance();
-              // prefs.setBool('isPassedInitial', true);
               context.pushReplacement('/login');
             },
           ),

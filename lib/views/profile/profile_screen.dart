@@ -178,6 +178,7 @@ class _ProfileState extends State<Profile> {
                         itemCount: userPosts.length,
                         itemBuilder: (context, index) {
                           final Post post = userPosts[index];
+
                           return GestureDetector(
                             onTap: () {
                               context.goNamed('updatePost', extra: post);
@@ -187,19 +188,19 @@ class _ProfileState extends State<Profile> {
                                 borderRadius: BorderRadius.circular(8),
                                 image: DecorationImage(
                                   image: NetworkImage(post.images?[0] ?? ''),
-                                  fit: BoxFit.fill,
+                                  fit: BoxFit.cover,
                                 ),
                               ),
                               child: Stack(
                                 children: [
                                   Positioned(
-                                    bottom: 8,
-                                    left: 8,
+                                    bottom: 0,
+                                    left: 0,
+                                    right: 0,
                                     child: Container(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 12, vertical: 6),
+                                      padding: const EdgeInsets.all(16),
                                       decoration: BoxDecoration(
-                                        color: Colors.transparent,
+                                        color: Colors.black.withOpacity(0.6),
                                         borderRadius: BorderRadius.circular(8),
                                       ),
                                       child: Text(
@@ -207,7 +208,15 @@ class _ProfileState extends State<Profile> {
                                         style: GoogleFonts.montserrat(
                                           color: Colors.white,
                                           fontWeight: FontWeight.bold,
-                                          fontSize: 18,
+                                          fontSize: 14,
+                                          shadows: [
+                                            Shadow(
+                                              color:
+                                                  Colors.black.withOpacity(0.5),
+                                              blurRadius: 2,
+                                              offset: const Offset(1, 1),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     ),

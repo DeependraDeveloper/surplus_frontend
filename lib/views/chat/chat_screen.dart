@@ -243,12 +243,21 @@ class _ChatScreenState extends State<ChatScreen> {
                 color: Colors.black,
                 iconSize: 28,
                 onPressed: () async {
-                  final call = Uri.parse('tel:+91 ${friend!.phone}');
-                  if (await canLaunchUrl(call)) {
-                    launchUrl(call);
-                  } else {
-                    throw 'Could not launch $call';
-                  }
+                  // final call = Uri.parse('tel:+91 ${friend!.phone}');
+                  // if (await canLaunchUrl(call)) {
+                  //   launchUrl(call);
+                  // } else {
+                  //   throw 'Could not launch $call';
+                  // }
+
+                  socket?.emit(
+                    'sendMessage',
+                    <String, dynamic>{
+                      'chatId': '${widget.chat.id}',
+                      'message': 'Requested For Phone Number',
+                      'sender': userId,
+                    },
+                  );
                 },
                 icon: const Icon(Icons.call),
               ),

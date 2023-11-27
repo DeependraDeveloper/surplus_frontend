@@ -690,4 +690,35 @@ class UserService {
       );
     }
   }
+
+  // deletePost
+  Future<JsonResponse> deletePost({required String postId}) async {
+    try {
+      final data = {
+        "postId": postId,
+      };
+
+      // api - /get/chats
+      final response = await dio.delete(kDeletePost, data: data);
+
+      if (response.statusCode == 200) {
+        return JsonResponse.success(
+          message: 'Post Deleted Succesfully!',
+        );
+      } else {
+        return JsonResponse.failure(
+          statusCode: response.statusCode ?? 500,
+          message: 'Failed to Delete Post!',
+        );
+      }
+    } on DioException catch (e) {
+      final message = e.message;
+      return JsonResponse.failure(
+        message: message.toString(),
+        statusCode: e.response?.statusCode ?? 500,
+      );
+    } on Exception catch (_) {
+      return JsonResponse.failure(message: 'something went worng');
+    }
+  }
 }

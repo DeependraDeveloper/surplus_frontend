@@ -100,3 +100,11 @@ class GetPostEvent extends PostEvent {
   @override
   List<Object> get props => [postId];
 }
+
+class DeletePostEvent extends PostEvent {
+  const DeletePostEvent({required this.postId});
+
+  final String postId;
+  @override
+  List<Object> get props => [postId];
+}

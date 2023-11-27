@@ -70,6 +70,7 @@ abstract class UserRepository {
   // get post
   Future<JsonResponse> getPost({required String postId});
   Future<JsonResponse> getProfile({required String userId});
+  Future<JsonResponse> deletePost({required String postId});
 }
 
 class UserRepositoryImpl extends UserRepository {
@@ -205,4 +206,7 @@ class UserRepositoryImpl extends UserRepository {
   @override
   Future<JsonResponse> getProfile({required String userId}) =>
       service.getProfile(userId: userId);
+  @override
+  Future<JsonResponse> deletePost({required String postId}) =>
+      service.deletePost(postId: postId);
 }

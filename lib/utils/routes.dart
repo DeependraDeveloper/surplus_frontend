@@ -49,7 +49,7 @@ class AppRouter {
             GoRoute(
               path: 'detail',
               name: 'detail',
-              builder: (context, state) => PostDetail(
+              builder: (context, state) => const PostDetail(
                 // post: state.extra as Post,
               ),
             ),
