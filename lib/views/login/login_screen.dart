@@ -53,7 +53,9 @@ class _LoginScreenState extends State<LoginScreen> {
             );
           } else if (state.message.isNotEmpty == true) {
             context.read<PostBloc>().add(LoadPostsEvent(
-                  range: 5,
+                  range:
+                      context.read<UserBloc>().state.user.range?.toDouble() ??
+                          5.0,
                   userId: state.user.id ?? '',
                   lat: context.read<LocationBloc>().state.position?.latitude ??
                       0,

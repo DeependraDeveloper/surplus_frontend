@@ -8,8 +8,8 @@ import 'package:surplus/bloc/location/location_bloc.dart';
 import 'package:surplus/bloc/post/post_bloc.dart';
 import 'package:surplus/bloc/profile_posts/profile_posts_bloc.dart';
 import 'package:surplus/bloc/user/user_bloc.dart';
-import 'package:surplus/views/widgets/common_widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:surplus/utils/notification_service.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -19,29 +19,28 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  // final service = NotificationService();
+  final service = NotificationService();
 
   @override
   void initState() {
-    // searchController = TextEditingController();
     super.initState();
-    // service.init();
+    service.init();
 
-    // service.controller.stream.listen((event) {
-    //   context.read<PostBloc>().add(LoadPostsEvent(
-    //       range: BlocProvider.of<PostBloc>(context).state.range));
-    // });
+    service.controller.stream.listen((event) {
+      // context.read<PostBloc>().add(LoadPostsEvent(
+      //     range: BlocProvider.of<PostBloc>(context).state.range));
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    final String userId =
-        BlocProvider.of<UserBloc>(context).state.user.id ?? '';
+    final String userId = context.read<UserBloc>().state.user.id ?? '';
     final double lat =
-        BlocProvider.of<LocationBloc>(context).state.position?.latitude ?? 0.0;
+        context.read<LocationBloc>().state.position?.latitude ?? 0.0;
     final double long =
-        BlocProvider.of<LocationBloc>(context).state.position?.longitude ?? 0.0;
-    final double range = context.watch<PostBloc>().state.range;
+        context.read<LocationBloc>().state.position?.longitude ?? 0.0;
+    final double range =
+        context.watch<UserBloc>().state.user.range?.toDouble() ?? 5.0;
 
     return Scaffold(
       appBar: AppBar(
@@ -106,9 +105,20 @@ class _HomeState extends State<Home> {
           }
 
           if (state.message.isNotEmpty) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(state.message),
+            // ScaffoldMessenger.of(context).showSnackBar(
+            //   SnackBar(
+            //     content: Text(state.message),
+            //   ),
+            // );
+
+            BlocProvider.of<PostBloc>(context).add(
+              LoadPostsEvent(
+                refresh: false,
+                userId: context.read<UserBloc>().state.user.id ?? '',
+                lat: context.read<LocationBloc>().state.position?.latitude ?? 0,
+                long:
+                    context.read<LocationBloc>().state.position?.longitude ?? 0,
+                range: context.read<PostBloc>().state.range,
               ),
             );
           }
@@ -162,9 +172,13 @@ class _HomeState extends State<Home> {
 
                           return GestureDetector(
                             onTap: () {
+                              context
+                                  .read<PostBloc>()
+                                  .add(GetPostEvent(postId: postId));
+
                               context.pushNamed(
                                 'detail',
-                                extra: post,
+                                // extra: post,
                               );
                             },
                             child: Container(
@@ -225,30 +239,6 @@ class _HomeState extends State<Home> {
                                             BlessPostEvent(
                                               postId: postId,
                                               userId: user,
-                                            ),
-                                          );
-
-                                          BlocProvider.of<PostBloc>(context)
-                                              .add(
-                                            LoadPostsEvent(
-                                              refresh: false,
-                                              userId: user,
-                                              lat: context
-                                                      .read<LocationBloc>()
-                                                      .state
-                                                      .position
-                                                      ?.latitude ??
-                                                  0,
-                                              long: context
-                                                      .read<LocationBloc>()
-                                                      .state
-                                                      .position
-                                                      ?.longitude ??
-                                                  0,
-                                              range: context
-                                                  .read<PostBloc>()
-                                                  .state
-                                                  .range,
                                             ),
                                           );
 
@@ -404,6 +394,7 @@ class _RangeSelectionDialogState extends State<RangeSelectionDialog> {
                     userId: userId,
                   ),
                 );
+            context.read<UserBloc>().add(GetUserEvent(userId: userId));
             context.pop(); // Return the selected range on OK press
           },
           child: const Text('OK'),

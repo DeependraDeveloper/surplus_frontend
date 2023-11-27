@@ -50,7 +50,7 @@ class AppRouter {
               path: 'detail',
               name: 'detail',
               builder: (context, state) => PostDetail(
-                post: state.extra as Post,
+                // post: state.extra as Post,
               ),
             ),
             GoRoute(

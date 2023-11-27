@@ -5,10 +5,10 @@ class User {
   final String? profilePic;
   final String? name;
   final String? email;
-  final int? blessed;
   final String? phone;
   final String? password;
   final bool? status;
+  final int? range;
   final DateTime? createdAt;
   final DateTime? updatedAt;
   final List<String>? devices;
@@ -21,7 +21,7 @@ class User {
     this.name,
     this.email,
     this.phone,
-    this.blessed,
+    this.range,
     this.password,
     this.status,
     this.createdAt,
@@ -36,11 +36,10 @@ class User {
     String? profilePic,
     String? name,
     String? email,
-    int? blessed,
     String? phone,
     String? password,
     bool? status,
-    String? role,
+    int? range,
     DateTime? createdAt,
     DateTime? updatedAt,
     List<String>? devices,
@@ -52,8 +51,8 @@ class User {
         profilePic: profilePic ?? this.profilePic,
         name: name ?? this.name,
         email: email ?? this.email,
-        blessed : blessed ?? this.blessed,
         phone: phone ?? this.phone,
+        range: range ?? this.range,
         password: password ?? this.password,
         status: status ?? this.status,
         createdAt: createdAt ?? this.createdAt,
@@ -68,8 +67,8 @@ class User {
         name: json["name"],
         profilePic: json["profilePic"],
         email: json["email"],
-        blessed : json["blessed"],
         phone: json["phone"],
+        range: json["range"],
         password: json["password"],
         status: json["status"],
         createdAt: json["createdAt"] == null
@@ -90,8 +89,8 @@ class User {
         "profilePic": profilePic,
         "name": name,
         "email": email,
-        "blessed":blessed,
         "phone": phone,
+        "range": range,
         "password": password,
         "status": status,
         "createdAt": createdAt?.toIso8601String(),

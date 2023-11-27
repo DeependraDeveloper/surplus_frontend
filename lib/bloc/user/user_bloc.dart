@@ -21,6 +21,7 @@ class UserBloc extends HydratedBloc<UserEvent, UserState> {
     on<ResetPasswordEvent>(_onResetPasswordEvent);
     on<UpdateProfileEvent>(_onUpdateProfileEvent);
     on<ClearUser>(_onClearUser);
+    on<GetUserEvent>(_onGetUserEvent);
   }
 
   final UserRepository repository;
@@ -186,6 +187,40 @@ class UserBloc extends HydratedBloc<UserEvent, UserState> {
 
   FutureOr<void> _onClearUser(ClearUser event, Emitter<UserState> emit) {
     emit(const UserState());
+  }
+
+  Future<FutureOr<void>> _onGetUserEvent(
+      GetUserEvent event, Emitter<UserState> emit) async {
+    emit(state.copyWith(isLoading: true, error: '', message: ''));
+    try {
+      final response = await repository.getProfile(
+        userId: event.userId,
+      );
+
+      if (response.success) {
+        final data = response.data as User;
+
+        emit(state.copyWith(
+          isLoading: false,
+          user: data,
+          message: response.message,
+        ));
+      } else {
+        emit(
+          state.copyWith(
+            isLoading: false,
+            error: 'Error : ${response.message}',
+          ),
+        );
+      }
+    } on Exception catch (_) {
+      emit(
+        state.copyWith(
+          isLoading: false,
+          error: 'Error : $_',
+        ),
+      );
+    }
   }
 
   @override

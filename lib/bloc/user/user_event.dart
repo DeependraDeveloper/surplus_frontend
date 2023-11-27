@@ -77,6 +77,13 @@ final class UpdateProfileEvent extends UserEvent {
   List<Object?> get props => [phone, userId, name, email, image];
 }
 
+final class GetUserEvent extends UserEvent {
+  final String userId;
 
+  const GetUserEvent({required this.userId});
+
+  @override
+  List<Object> get props => [userId];
+}
 
 final class ClearUser extends UserEvent {}

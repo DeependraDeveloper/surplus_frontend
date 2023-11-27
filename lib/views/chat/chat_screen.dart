@@ -67,7 +67,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
   Future<void> initSocket() async {
     //! LOCAL
-    const String url = 'http://192.168.1.138:5000/';
+    const String url = 'http://192.168.1.139:5000/';
     // const String url = 'http://192.168.200.87:5000/';
 
     //! SERVER

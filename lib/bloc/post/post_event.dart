@@ -92,3 +92,11 @@ class BlessPostEvent extends PostEvent {
   @override
   List<Object> get props => [postId, userId];
 }
+
+class GetPostEvent extends PostEvent {
+  const GetPostEvent({required this.postId});
+
+  final String postId;
+  @override
+  List<Object> get props => [postId];
+}

@@ -12,7 +12,7 @@ const httpScheme = 'http';
 // const baseUrl = 'surplus-84pe.onrender.com';
 
 //! LOCAL
-const baseUrl = '192.168.1.138:5000';
+const baseUrl = '192.168.1.139:5000';
 // const baseUrl = '192.168.200.87:5000';
 
 const apiPath = '/api';
@@ -34,3 +34,5 @@ const kConnect = "/connect";
 const kGetChats = "/get/chats";
 const kSendMessage = "/send/chat";
 const kBlessPost = "/bless/post";
+const kGetPost = "/post";
+const kUserProfile = "/info";

@@ -609,4 +609,85 @@ class UserService {
       return JsonResponse.failure(message: 'something went worng');
     }
   }
+
+  // getPost
+  Future<JsonResponse> getPost({
+    required String postId,
+  }) async {
+    try {
+      final data = {
+        "postId": postId,
+      };
+
+      final response = await dio.get(kGetPost, queryParameters: data);
+
+      if (response.statusCode == 200) {
+        final Post post = Post.fromJson(response.data);
+
+        return JsonResponse.success(
+          data: post,
+          message: 'Feteched post successfully!.',
+        );
+      } else {
+        return JsonResponse.failure(
+          statusCode: response.statusCode ?? 500,
+          message: 'Failed to fetch post!.',
+        );
+      }
+    } on DioException catch (e) {
+      final message = e.message;
+      return JsonResponse.failure(
+        message: message.toString(),
+        statusCode: e.response?.statusCode ?? 500,
+      );
+    } on Exception catch (_) {
+      return JsonResponse.failure(message: 'something went worng');
+    }
+  }
+
+  //getProfile
+  Future<JsonResponse> getProfile({
+    required String userId,
+  }) async {
+    try {
+      final data = <String, dynamic>{
+        'userId': userId,
+      };
+
+      final response = await dio.get(
+        kUserProfile,
+        queryParameters: data,
+      );
+
+      if (response.statusCode == 200) {
+        final data = User.fromJson(response.data ?? <String, dynamic>{});
+
+        return JsonResponse.success(
+          message: 'Fetched profile successfully!',
+          data: data,
+        );
+      } else if (response.statusCode == 422) {
+        return JsonResponse.failure(
+          statusCode: response.statusCode ?? 500,
+          message: 'Validation error: ',
+        );
+      } else {
+        final error = response.data?["message"]?.toString();
+        return JsonResponse.failure(
+          statusCode: response.statusCode ?? 500,
+          message: error ?? 'something went wrong!',
+        );
+      }
+    } on DioException catch (e) {
+      final error = e.response?.data?["message"]?.toString();
+      return JsonResponse.failure(
+        message: error.toString(),
+        statusCode: e.response?.statusCode ?? 500,
+      );
+    } on Exception catch (_) {
+      return JsonResponse.failure(
+        message: 'Something went wrong!',
+      );
+    }
+  }
 }
