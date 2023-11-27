@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyCgt9ABxsW0mxQVrZDLNuQmDnuXpWF9XH0</string>
+	<key>GCM_SENDER_ID</key>
+	<string>301128312633</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.surplus</string>
+	<key>PROJECT_ID</key>
+	<string>surplusbydp</string>
+	<key>STORAGE_BUCKET</key>
+	<string>surplusbydp.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:301128312633:ios:5eb46243c656efc2676ae8</string>
+</dict>
+</plist>
