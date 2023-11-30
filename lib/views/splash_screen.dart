@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:flutter/foundation.dart' show kIsWeb;
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
