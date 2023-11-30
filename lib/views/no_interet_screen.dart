@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:surplus/views/loading_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class NoInternetPage extends StatelessWidget {

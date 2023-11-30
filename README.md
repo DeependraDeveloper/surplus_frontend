@@ -17,8 +17,5 @@ samples, guidance on mobile development, and a full API reference.
 
 
 # TODO
- - Near Post by query -> For any lat and long range  - Done
- - Mulitple chat off on same user post - Done
- - Chat should directly open
  - Chat photo or gallery or location send 
  - Auth change [Later].
