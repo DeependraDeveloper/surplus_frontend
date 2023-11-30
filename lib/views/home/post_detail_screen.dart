@@ -291,7 +291,4 @@ class _PostDetailState extends State<PostDetail> {
       ),
     );
   }
-
-  @override
-  List<Object?> get props => [];
 }

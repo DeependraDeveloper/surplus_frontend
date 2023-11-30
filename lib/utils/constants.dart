@@ -13,7 +13,7 @@ const httpScheme = 'http';
 
 //! LOCAL
 const baseUrl = '192.168.1.139:5000';
-// const baseUrl = '192.168.200.87:5000';
+// const baseUrl = '192.168.89.87:5000';
 
 const apiPath = '/api';
 const apiVersion = '/v1/user';

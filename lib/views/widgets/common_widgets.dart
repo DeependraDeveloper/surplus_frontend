@@ -32,7 +32,7 @@ class PostCard extends StatelessWidget {
     final distance = (this.distance / 1000);
 
     return Container(
-      height: 280,
+      // height: 280,
       margin: const EdgeInsets.all(8),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12.0),

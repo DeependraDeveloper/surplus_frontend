@@ -1,8 +1,12 @@
+import 'dart:async';
+
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:surplus/bloc/auth/authentication_bloc.dart';
 import 'package:surplus/bloc/chat/chat_bloc.dart';
+import 'package:surplus/bloc/connectivity/connectivity_bloc.dart';
 import 'package:surplus/bloc/friend/friend_posts_bloc.dart';
 import 'package:surplus/bloc/location/location_bloc.dart';
 import 'package:surplus/bloc/post/post_bloc.dart';
@@ -13,9 +17,39 @@ import 'package:surplus/data/repositories/user_repository.dart';
 import 'package:surplus/data/services/location_service.dart';
 import 'package:surplus/data/services/user_service.dart';
 import 'package:surplus/utils/routes.dart';
+import 'package:surplus/views/navigation_observer.dart';
 
-class Application extends StatelessWidget {
+class Application extends StatefulWidget {
   const Application({super.key});
+
+  @override
+  State<Application> createState() => _ApplicationState();
+}
+
+class _ApplicationState extends State<Application> with WidgetsBindingObserver {
+  late StreamSubscription subscription;
+  bool isDeviceConnected = false;
+  bool isAlertSet = false;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    subscription.cancel();
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+    print('App Lifecycle State: $state');
+    // You can perform actions based on different lifecycle states here
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -83,6 +117,12 @@ class Application extends StatelessWidget {
             ),
           ),
         ),
+        BlocProvider<ConnectivityBloc>(
+          create: (context) => ConnectivityBloc(
+            connectivity: Connectivity(),
+            dio: Dio(),
+          )..add(const ConnectivityChecker()),
+        ),
       ],
       child: BlocBuilder<UserBloc, UserState>(
         buildWhen: (p, c) => p.user.id != c.user.id,
@@ -90,8 +130,9 @@ class Application extends StatelessWidget {
           return MaterialApp.router(
             debugShowCheckedModeBanner: false,
             routerConfig: AppRouter(
-              authBloc: context.read<AuthenticationBloc>(),
-            ).router,
+                    authBloc: context.read<AuthenticationBloc>(),
+                    observer: NavigationObserver())
+                .router,
           );
         },
       ),

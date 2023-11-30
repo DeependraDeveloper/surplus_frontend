@@ -68,7 +68,8 @@ class _ChatScreenState extends State<ChatScreen> {
   Future<void> initSocket() async {
     //! LOCAL
     const String url = 'http://192.168.1.139:5000/';
-    // const String url = 'http://192.168.200.87:5000/';
+    // const String url = 'http://192.168.89.87:5000/';
+
 
     //! SERVER
     // const String url = "https://surplus-84pe.onrender.com/";
@@ -547,39 +548,3 @@ class _ChatScreenState extends State<ChatScreen> {
     );
   }
 }
-
-// final Widget msgcard =  Container(
-//                             decoration: BoxDecoration(
-//                               borderRadius: BorderRadius.circular(20),
-//                               color:
-//                                   (messages.reversed.toList()[index].sender ==
-//                                           userId
-//                                       ? Colors.grey.shade200
-//                                       : Colors.blue[200]),
-//                             ),
-//                             padding: const EdgeInsets.all(16),
-//                             child: Column(
-//                               crossAxisAlignment: CrossAxisAlignment.start,
-//                               children: [
-//                                 Text(
-//                                   messages.reversed.toList()[index].content ??
-//                                       '',
-//                                   style: GoogleFonts.montserrat(
-//                                     color: Colors.black,
-//                                     fontWeight: FontWeight.normal,
-//                                     fontSize: 16,
-//                                   ),
-//                                 ),
-//                                 Text(
-//                                   time,
-//                                   style: GoogleFonts.montserrat(
-//                                     color: Colors.black,
-//                                     fontWeight: FontWeight.normal,
-//                                     fontSize: 16,
-//                                   ),
-//                                 ),
-//                               ],
-//                             ),
-//                           ),
-//                         ),
-//                       );

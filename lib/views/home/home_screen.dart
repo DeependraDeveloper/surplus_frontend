@@ -178,7 +178,7 @@ class _HomeState extends State<Home> {
                               context.pushNamed('detail');
                             },
                             child: Container(
-                              height: 280,
+                              // height: 280,
                               margin: const EdgeInsets.all(8),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(12.0),
@@ -194,14 +194,8 @@ class _HomeState extends State<Home> {
                                   begin: Alignment.topLeft,
                                   end: Alignment.bottomRight,
                                   colors: [
-                                    // Colors.orange.shade200,
-                                    // Colors.orange.shade400,
                                     Colors.deepOrange.shade200,
                                     Colors.deepOrange.shade400
-                                    // Colors.orange.shade300,
-                                    // Colors.orange.shade600
-                                    // Colors.orange.shade100,
-                                    // Colors.orange.shade300
                                   ],
                                 ),
                               ),
@@ -241,7 +235,7 @@ class _HomeState extends State<Home> {
                                   const SizedBox(height: 5),
                                   Padding(
                                     padding: const EdgeInsets.symmetric(
-                                        horizontal: 10),
+                                        horizontal: 8),
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
@@ -316,6 +310,7 @@ class _HomeState extends State<Home> {
                                       ],
                                     ),
                                   ),
+                                  const SizedBox(height: 6)
                                 ],
                               ),
                             ),
@@ -366,12 +361,18 @@ class _RangeSelectionDialogState extends State<RangeSelectionDialog> {
     final double long =
         BlocProvider.of<LocationBloc>(context).state.position?.longitude ?? 0.0;
     return AlertDialog(
-      title: Text(
-        'Select Distance Range',
-        style: GoogleFonts.montserrat(
-          fontSize: 18,
-          fontWeight: FontWeight.w700,
-        ),
+      backgroundColor: Colors.green[200],
+      alignment: Alignment.topRight,
+      title: const Text(
+        'Add Distance Range',
+      ),
+      titleTextStyle: GoogleFonts.montserrat(
+          fontSize: 18, fontWeight: FontWeight.w700, color: Colors.black),
+      icon: const Icon(
+        Icons.directions_walk_rounded,
+        size: 24,
+        weight: 100,
+        color: Colors.green,
       ),
       content: Column(
         mainAxisSize: MainAxisSize.min,
@@ -383,10 +384,10 @@ class _RangeSelectionDialogState extends State<RangeSelectionDialog> {
                 activeTrackColor: const Color(0xFFF15A29),
                 inactiveTrackColor: Colors.grey[300],
                 trackShape: const RoundedRectSliderTrackShape(),
-                trackHeight: 16.0, // Change the height of the slider track
+                trackHeight: 6.0, // Change the height of the slider track
                 thumbColor: const Color(0xFFF15A29),
                 thumbShape: const RoundSliderThumbShape(
-                  enabledThumbRadius: 14.0, // Change the size of the thumb
+                  enabledThumbRadius: 10.0, // Change the size of the thumb
                 ),
                 overlayColor: const Color(0x29FF5722),
                 overlayShape: const RoundSliderOverlayShape(
@@ -407,12 +408,15 @@ class _RangeSelectionDialogState extends State<RangeSelectionDialog> {
               ),
             ),
           ),
-          Text(
-            'Selected Distance Range: $_selectedRange km',
-            style: GoogleFonts.montserrat(
-              color: const Color(0xFFF15A29),
-              fontSize: 12,
-              fontWeight: FontWeight.w700,
+          Padding(
+            padding: const EdgeInsets.only(top: 16.0),
+            child: Text(
+              'Selected Distance Range: $_selectedRange km',
+              style: GoogleFonts.montserrat(
+                color: Colors.black,
+                fontSize: 12,
+                fontWeight: FontWeight.w700,
+              ),
             ),
           ),
         ],
