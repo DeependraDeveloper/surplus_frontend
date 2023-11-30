@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
 import 'package:surplus/views/loading_screen.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class NoInternetPage extends StatelessWidget {
   const NoInternetPage({
-    super.key,
-  });
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,25 +14,46 @@ class NoInternetPage extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              Lottie.network(
-                'https://lottie.host/2554a005-b3e5-4839-9bc9-242faa7d2970/iTzPK7U9Iz.json',
-                errorBuilder: (context, error, stackTrace) {
-                  return const SizedBox.shrink();
-                },
+              Image.asset(
+                'assets/images/no_internet.png',
+                // You can adjust the width and height if needed
+                width: 200,
+                height: 200,
+                fit: BoxFit.contain,
               ),
               const SizedBox(height: 20),
               Text(
                 'No internet connection!',
-                style: Theme.of(context).textTheme.titleMedium,
-              ),
-              const SizedBox(height: 8),
-              Text(
-                'Please check your internet connection and try again.',
-                style: Theme.of(context).textTheme.bodySmall,
+                style: GoogleFonts.montserrat(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w700,
+                  color: Colors.black,
+                  letterSpacing: 1,
+                ),
               ),
               const SizedBox(height: 20),
-              const Loading(
-                event: 'Trying to reconnect...',
+              Center(
+                child: Wrap(
+                  alignment: WrapAlignment.center,
+                  crossAxisAlignment: WrapCrossAlignment.center,
+                  runAlignment: WrapAlignment.center,
+                  spacing: 12.0,
+                  runSpacing: 12.0,
+                  children: [
+                    const CircularProgressIndicator.adaptive(
+                      backgroundColor: Color(0xFFF15A29),
+                    ),
+                    Text(
+                      "Trying to reconnect",
+                      style: GoogleFonts.montserrat(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.black,
+                        letterSpacing: 1,
+                      ),
+                    ),
+                  ],
+                ),
               )
             ],
           ),

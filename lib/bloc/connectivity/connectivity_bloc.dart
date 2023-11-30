@@ -92,7 +92,15 @@ class ConnectivityBloc extends Bloc<ConnectivityEvent, ConnectivityState> {
   }
 
   FutureOr<void> _onConnectivitySetter(
-      ConnectivitySetter event, Emitter<ConnectivityState> emit) {}
+      ConnectivitySetter event, Emitter<ConnectivityState> emit) {
+    emit(state.copyWith(
+      status: event.status,
+      connectivityType: event.connectivityType,
+      busy: event.busy,
+      error: event.error,
+      message: event.message,
+    ));
+  }
 
   @override
   Future<void> close() {
