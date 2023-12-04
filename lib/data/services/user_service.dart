@@ -277,9 +277,9 @@ class UserService {
         );
       }
     } on DioException catch (e) {
-      final message = e.message;
+      final error = e.response?.data?["message"]?.toString();
       return JsonResponse.failure(
-        message: message.toString(),
+        message: error.toString(),
         statusCode: e.response?.statusCode ?? 500,
       );
     } on Exception catch (_) {
@@ -361,6 +361,8 @@ class UserService {
         data: formdata,
       );
 
+      print('-------------->>> $response');
+
       if (response.statusCode == 201) {
         final data = response.data;
         return JsonResponse.success(
@@ -374,9 +376,10 @@ class UserService {
         );
       }
     } on DioException catch (e) {
-      final message = e.message;
+      final error = e.response?.data?["message"]?.toString();
+
       return JsonResponse.failure(
-        message: message.toString(),
+        message: error.toString(),
         statusCode: e.response?.statusCode ?? 500,
       );
     } on Exception catch (_) {
@@ -424,9 +427,9 @@ class UserService {
         );
       }
     } on DioException catch (e) {
-      final message = e.message;
+      final error = e.response?.data?["message"]?.toString();
       return JsonResponse.failure(
-        message: message.toString(),
+        message: error.toString(),
         statusCode: e.response?.statusCode ?? 500,
       );
     } on Exception catch (_) {
@@ -466,9 +469,9 @@ class UserService {
         );
       }
     } on DioException catch (e) {
-      final message = e.message;
+      final error = e.response?.data?["message"]?.toString();
       return JsonResponse.failure(
-        message: message.toString(),
+        message: error.toString(),
         statusCode: e.response?.statusCode ?? 500,
       );
     } on Exception catch (_) {
@@ -499,9 +502,9 @@ class UserService {
         );
       }
     } on DioException catch (e) {
-      final message = e.message;
+      final error = e.response?.data?["message"]?.toString();
       return JsonResponse.failure(
-        message: message.toString(),
+        message: error.toString(),
         statusCode: e.response?.statusCode ?? 500,
       );
     } on Exception catch (_) {
@@ -538,9 +541,9 @@ class UserService {
         );
       }
     } on DioException catch (e) {
-      final message = e.message;
+      final error = e.response?.data?["message"]?.toString();
       return JsonResponse.failure(
-        message: message.toString(),
+        message: error.toString(),
         statusCode: e.response?.statusCode ?? 500,
       );
     } on Exception catch (_) {
@@ -567,9 +570,9 @@ class UserService {
         );
       }
     } on DioException catch (e) {
-      final message = e.message;
+      final error = e.response?.data?["message"]?.toString();
       return JsonResponse.failure(
-        message: message.toString(),
+        message: error.toString(),
         statusCode: e.response?.statusCode ?? 500,
       );
     } on Exception catch (_) {
@@ -600,9 +603,9 @@ class UserService {
         );
       }
     } on DioException catch (e) {
-      final message = e.message;
+      final error = e.response?.data?["message"]?.toString();
       return JsonResponse.failure(
-        message: message.toString(),
+        message: error.toString(),
         statusCode: e.response?.statusCode ?? 500,
       );
     } on Exception catch (_) {
@@ -635,9 +638,9 @@ class UserService {
         );
       }
     } on DioException catch (e) {
-      final message = e.message;
+      final error = e.response?.data?["message"]?.toString();
       return JsonResponse.failure(
-        message: message.toString(),
+        message: error.toString(),
         statusCode: e.response?.statusCode ?? 500,
       );
     } on Exception catch (_) {
@@ -712,9 +715,10 @@ class UserService {
         );
       }
     } on DioException catch (e) {
-      final message = e.message;
+      final error = e.response?.data?["message"]?.toString();
+
       return JsonResponse.failure(
-        message: message.toString(),
+        message: error.toString(),
         statusCode: e.response?.statusCode ?? 500,
       );
     } on Exception catch (_) {

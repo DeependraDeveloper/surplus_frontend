@@ -40,6 +40,9 @@ dependencies:
   flutter_native_splash: ^2.3.6
   connectivity_plus: ^5.0.2
   lottie: ^2.7.0
+  flutter_localizations:
+    sdk: flutter
+  flutter_gen: ^5.3.2
 
 dev_dependencies:
   flutter_test:

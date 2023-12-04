@@ -191,7 +191,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
-                                    return 'Please enter Store password';
+                                    return 'Please enter  password';
                                   }
                                   return null;
                                 },
@@ -320,6 +320,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ],
                       ),
+                  
                     ],
                   ),
                 ),

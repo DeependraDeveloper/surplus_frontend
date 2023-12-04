@@ -14,6 +14,7 @@ class User {
   final List<String>? devices;
   final Location? location;
   final String? accessToken;
+  final bool? isAdmin;
 
   const User({
     this.id,
@@ -29,6 +30,7 @@ class User {
     this.devices,
     this.location,
     this.accessToken,
+    this.isAdmin,
   });
 
   User copyWith({
@@ -45,6 +47,7 @@ class User {
     List<String>? devices,
     Location? location,
     String? accessToken,
+    bool? isAdmin,
   }) =>
       User(
         id: id ?? this.id,
@@ -60,6 +63,7 @@ class User {
         devices: devices ?? this.devices,
         location: location ?? this.location,
         accessToken: accessToken ?? this.accessToken,
+        isAdmin: isAdmin ?? this.isAdmin,
       );
 
   factory User.fromJson(Map<String, dynamic> json) => User(
@@ -71,7 +75,8 @@ class User {
         range: json["range"],
         password: json["password"],
         status: json["status"],
-        createdAt: json["createdAt"] == null
+        createdAt: json[
+          "createdAt"] == null
             ? null
             : DateTime.parse(json["createdAt"]),
         updatedAt: json["updatedAt"] == null
@@ -82,6 +87,7 @@ class User {
             : List<String>.from(json["devices"]!.map((x) => x)),
         location: Location.fromJson(json['location'] ?? <String, dynamic>{}),
         accessToken: json["access_token"],
+        isAdmin: json['isAdmin'],
       );
 
   Map<String, dynamic> toJson() => {
@@ -99,5 +105,6 @@ class User {
             devices == null ? [] : List<dynamic>.from(devices!.map((x) => x)),
         'location': location?.toJson(),
         "access_token": accessToken,
+        'isAdmin': isAdmin,
       };
 }

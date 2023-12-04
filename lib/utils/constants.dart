@@ -1,7 +1,6 @@
 const kAppName = 'surplusbydp';
 const kUser = 'kUser';
 
-const kFontFamily = 'Roboto';
 
 //! SERVER
 // const httpScheme = 'https';

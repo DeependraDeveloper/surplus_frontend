@@ -16,15 +16,12 @@ import 'package:surplus/data/services/location_service.dart';
 import 'package:surplus/data/services/user_service.dart';
 import 'package:surplus/utils/routes.dart';
 import 'package:surplus/views/navigation_observer.dart';
+// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
-class Application extends StatefulWidget {
+class Application extends StatelessWidget {
   const Application({super.key});
 
-  @override
-  State<Application> createState() => _ApplicationState();
-}
-
-class _ApplicationState extends State<Application> {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -102,11 +99,18 @@ class _ApplicationState extends State<Application> {
         buildWhen: (p, c) => p.user.id != c.user.id,
         builder: (context, state) {
           return MaterialApp.router(
+            localizationsDelegates: const [
+             // AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+          //  supportedLocales: AppLocalizations.supportedLocales,
             debugShowCheckedModeBanner: false,
             routerConfig: AppRouter(
-                    authBloc: context.read<AuthenticationBloc>(),
-                    observer: NavigationObserver())
-                .router,
+              authBloc: context.read<AuthenticationBloc>(),
+              observer: NavigationObserver(),
+            ).router,
           );
         },
       ),
