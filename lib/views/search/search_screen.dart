@@ -123,7 +123,7 @@ class _SearchState extends State<Search> {
                       'Search',
                       style: GoogleFonts.montserrat(
                         fontSize: 18,
-                        color: Colors.black,
+                        color: Colors.white,
                         fontWeight: FontWeight.w700,
                       ),
                     ),

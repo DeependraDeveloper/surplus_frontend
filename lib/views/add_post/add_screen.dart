@@ -67,11 +67,10 @@ class _AddState extends State<Add> {
         title: Text(
           'DONATE FOR A CAUSE',
           style: GoogleFonts.montserrat(
-            fontSize: 18,
-            fontWeight: FontWeight.w700,
-            color: Colors.white,
-            letterSpacing: 1
-          ),
+              fontSize: 18,
+              fontWeight: FontWeight.w700,
+              color: Colors.white,
+              letterSpacing: 1),
         ),
         centerTitle: true,
         bottom: const PreferredSize(
@@ -356,7 +355,7 @@ class _AddState extends State<Add> {
                               child: Text(
                                 "Submit",
                                 style: GoogleFonts.montserrat(
-                                  color: Colors.black,
+                                  color: Colors.white,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 18,
                                 ),

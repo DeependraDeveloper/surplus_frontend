@@ -84,7 +84,7 @@ class PostCard extends StatelessWidget {
           ),
           const SizedBox(height: 5),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 8),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -163,6 +163,7 @@ class PostCard extends StatelessWidget {
               ],
             ),
           ),
+          const SizedBox(height: 6),
         ],
       ),
     );

@@ -178,7 +178,6 @@ class _HomeState extends State<Home> {
                               context.pushNamed('detail');
                             },
                             child: Container(
-                              // height: 280,
                               margin: const EdgeInsets.all(8),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(12.0),
@@ -361,8 +360,8 @@ class _RangeSelectionDialogState extends State<RangeSelectionDialog> {
     final double long =
         BlocProvider.of<LocationBloc>(context).state.position?.longitude ?? 0.0;
     return AlertDialog(
-      backgroundColor: Colors.green[200],
-      alignment: Alignment.topRight,
+      // backgroundColor: Colors.green[200],
+      alignment: Alignment.center,
       title: const Text(
         'Add Distance Range',
       ),
